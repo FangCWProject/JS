@@ -41,22 +41,39 @@
     var oBox = document.getElementById('box');
     var oMsg = document.getElementById('msg');
     var outBox = true,outMsg = true;
+    //进入box时outBox=false，退出时为true。进入msg时outMsg=false，退出为true
+    //将情况列举出来并分析可知，只有当(outBox&&outMsg)结果为true时msg才会显示，其余时候皆为隐藏
     oBox.onmouseenter = function mouseIn(){
         outBox = false;
-        oMsg.className = 'msg_in';
+        if (outBox&&outMsg){
+            oMsg.className = 'msg_out';
+        }
+        else
+            oMsg.className = 'msg_in';
     }
     oBox.onmouseleave = function(){
         outBox = true;
-        if (outBox && outMsg) {
+        if (outBox&&outMsg){
             oMsg.className = 'msg_out';
         }
+        else
+            oMsg.className = 'msg_in';
     }
     oMsg.onmouseenter = function () {
-        outBox = false;
         outMsg = false;
+        if (outBox&&outMsg){
+            oMsg.className = 'msg_out';
+        }
+        else
+            oMsg.className = 'msg_in';
     }
     oMsg.onmouseleave = function () {
         outMsg = true;
+        if (outBox&&outMsg){
+            oMsg.className = 'msg_out';
+        }
+        else
+            oMsg.className = 'msg_in';
     }
 </script>
 </html>
