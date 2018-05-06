@@ -40,9 +40,23 @@
 <script type="text/javascript">
     var oBox = document.getElementById('box');
     var oMsg = document.getElementById('msg');
-    var outBox = true,outMsg = true;
+
+    oBox.onmouseenter = function mouseIn(){
+        oMsg.className = 'msg_in';
+    }
+    oBox.onmouseleave = function(){
+        oMsg.className = 'msg_out';
+    }
+    oMsg.onmouseenter = function () {
+        oMsg.className = 'msg_in';
+    }
+    oMsg.onmouseleave = function () {
+        oMsg.className = 'msg_out';
+    }
+    //var outBox = true,outMsg = true;
     //进入box时outBox=false，退出时为true。进入msg时outMsg=false，退出为true
     //将情况列举出来并分析可知，只有当(outBox&&outMsg)结果为true时msg才会显示，其余时候皆为隐藏
+    /*
     oBox.onmouseenter = function mouseIn(){
         outBox = false;
         if (outBox&&outMsg){
@@ -75,5 +89,6 @@
         else
             oMsg.className = 'msg_in';
     }
+    */
 </script>
 </html>
