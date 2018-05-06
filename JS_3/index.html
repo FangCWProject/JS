@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,span,ul,li,i,div,#shuru,#add_but{
+            padding: 0;
+            margin: 0;
+        }
+        a{
+            text-decoration: none;
+            color: #000;
+            font-size: 20px;
+        }
+        a:hover{
+            color: #f66;
+        }
+        .box{
+            width:500px;
+            margin: 50px auto;
+            font-family: '微软雅黑';
+            font-size: 16px;
+        }
+        .top{
+            height: 30px;
+            line-height: 30px;
+            padding:5px 10px 5px 15px;
+            background-color: #000;
+            color: #fff;
+            font-size: 0;
+        }
+        .text{
+            float: left;
+        }
+        .text,#ico,#shuru,#add_but{
+            font-size: 16px;
+            vertical-align: middle;
+        }
+        #input_box{
+            display: none;
+        }
+        #shuru,#add_but{
+            height: 27px;
+            line-height: 27px;
+            border: none;
+            margin-left: 50px;
+            outline: none;
+        }
+        #shuru{
+            padding-left: 10px;
+        }
+        #add_but{
+            cursor: pointer;
+            padding:0 10px;
+            margin-left: 0;
+            background-color: #ddd;
+            color: #555;
+        }
+        #ico{
+            float: right;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        #list{
+            list-style-type: none;
+            padding: 0px 15px;
+            background-color: #fff;
+            font-size: 0;
+            border: 1px solid #000;
+        }
+        #list li{
+            height:20px;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+            line-height: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="top">
+            <span class="text">最新动态</span>
+            <span id="ico">＋</span>
+            <div id="input_box">
+                <input id="shuru" type="text" placeholder="请于此输入内容"><button id="add_but">添加</button>
+            </div>
+        </div>
+        <ul id="list"></ul>
+    </div>
+<script>
+    var oInputBox = document.getElementById('input_box');
+    var oShuru = document.getElementById('shuru');
+    var oList = document.getElementById('list');
+    document.getElementById('ico').onclick = function (){
+        oInputBox.style.display = "block";
+    }
+    document.getElementById('add_but').onclick = function () {
+        oInputBox.style.display = "none";
+        var str = "<li>"+oShuru.value+"</li>";
+        oList.innerHTML += str;
+        oShuru.value = "";
+    }
+</script>
+</body>
+</html>
