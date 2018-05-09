@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,div,ul,li,button,img{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            list-style-type: none;
+        }
+        .wrap{
+            width: 600px;
+            height: 550px;
+            margin: 50px auto;
+            font-family: '微软雅黑';
+        }
+        #loop-but,#danbian-but{
+            width: 100px;
+            height: 50px;
+            line-height: 30px;
+            border: none;
+            background-color: #000;
+            text-align: center;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .box{
+            position: relative;
+            width: 600px;
+            height: 500px;
+        }
+        #list{
+            width: 100%;
+            height: 100%;
+        }
+        #list li{
+            position: absolute;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            -webkit-transition: opacity .45s;
+            -moz-transition: opacity .45s;
+            -ms-transition: opacity .45s;
+            -o-transition: opacity .45s;
+            transition: opacity .45s;
+        }
+        #list li:nth-child(1){
+            opacity: 1;
+        }
+        #list li img{
+            width: 100%;
+            /*height: 100%;*/
+        }
+        .t-num,#to-left-but,#to-right-but,.b-num{
+            position: absolute;
+            background-color: rgba(0,0,0,.45);
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+        }
+        .t-num{
+            top: 0;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+
+        }
+        #to-left-but,#to-right-but{
+            top: 0px;
+            bottom: 0px;
+            cursor: pointer;
+            width: 35px;
+            height: 130px;
+            border: none;
+            margin: auto;
+        }
+        #to-left-but{
+            left: 0;
+        }
+        #to-right-but{
+            right: 0;
+        }
+        .b-num{
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+        }
+        /*.activity{*/
+            /*background-color: #f66;*/
+        /*}*/
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <button id="loop-but" style="background-color:#FFD621">循环播放</button>
+        <button id="danbian-but">单边播放</button>
+        <div class="box">
+            <ul id="list">
+                <li><img src="images/01.jpg" alt="这是第1张图片"></li>
+                <li><img src="images/02.jpg" alt="这是第2张图片"></li>
+                <li><img src="images/03.jpg" alt="这是第3张图片"></li>
+                <li><img src="images/04.jpg" alt="这是第4张图片"></li>
+                <li><img src="images/05.png" alt="这是第5张图片"></li>
+                <li><img src="images/06.jpg" alt="这是第6张图片"></li>
+            </ul>
+            <div class="t-num">1 / 6</div>
+            <button id="to-left-but">上一张</button>
+            <button id="to-right-but">下一张</button>
+            <div class="b-num">第 1 张图片</div>
+        </div>
+    </div>
+    <script>
+        var oLoop = document.getElementById('loop-but'),
+            oDanbian = document.getElementById('danbian-but'),
+            oList = document.getElementById('list'),
+            arrLi = oList.getElementsByTagName('li'),
+            moShi = true,//代表播放模式，true为循环，false为单边
+            oRightBut = document.getElementById('to-right-but'),
+            oLeftBut = document.getElementById('to-left-but'),
+            oTopNum = document.getElementsByClassName('t-num')[0],
+            oBotNum = document.getElementsByClassName('b-num')[0],
+            i=0;
+
+        oLeftBut.onclick = function(){
+            arrLi[i].style.opacity = 0;
+            i--;
+            if(i<0){
+                if(moShi){
+                    i = 5;
+                }
+                else{
+                    i = 0;
+                    alert('已到达第一张图片');
+                }
+            }
+            oTopNum.innerText = `${i+1} / 6`;
+            oBotNum.innerText = `第 ${i+1} 张图片`;
+            arrLi[i].style.opacity = 1;
+        }
+
+        oRightBut.onclick = function(){
+            arrLi[i].style.opacity = 0;
+            i++;
+            if(i>5){
+                if(moShi){
+                    i = 0;
+                }
+                else{
+                    i = 5;
+                    alert('已到达最后一张图片');
+                }
+            }
+            oTopNum.innerText = `${i+1} / 6`;
+            oBotNum.innerText = `第 ${i+1} 张图片`;
+            arrLi[i].style.opacity = 1;
+        }
+
+        oLoop.onclick = function () {
+            if(!moShi){
+                moShi = !moShi;
+                oLoop.style.backgroundColor = "#FFD621";
+                oDanbian.style.backgroundColor = "";
+            }
+        }
+        oDanbian.onclick = function () {
+            if(moShi){
+                moShi = !moShi;
+                oDanbian.style.backgroundColor = "#FFD621";
+                oLoop.style.backgroundColor = "";
+            }
+        }
+    </script>
+</body>
+</html>
