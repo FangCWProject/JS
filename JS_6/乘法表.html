@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打印99乘法表</title>
+    <style>
+        body,li,span,ul{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color: #eee;
+        }
+        .list{
+            list-style-type: none;
+            border: 1px solid #222;
+            margin-bottom: 5px;
+            background-color: #fff;
+            font-size: 0;
+        }
+        li{
+            margin: 10px;
+        }
+        li span{
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid #5383ff;
+            margin-right: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <ul class="list">
+    </ul>
+    <ul class="list">
+    </ul>
+    <ul class="list">
+    </ul>
+    <ul class="list">
+    </ul>
+
+    <script>
+        var arrList = document.getElementsByClassName('list'),
+            row,col,str;
+        //row为行，col为列,为方便计算从1开始
+        for(row=1,str = "";row != 10;row++){
+            str += "<li>";
+            for(col = 1;col <= row;col++){
+                str += `<span>${row}*${col}=${row*col}<\/span>`;
+            }
+            str += "<\/li>";
+        }
+        arrList[0].innerHTML = str;
+
+        for(row=9,str = "";row != 0;row--){
+            str += "<li>";
+            for(col = 1;col <= row;col++){
+                str += `<span>${row}*${col}=${row*col}<\/span>`;
+            }
+            str += "<\/li>";
+        }
+        arrList[1].innerHTML = str;
+
+        for(row=1,str="";row !=10;row++){
+            //是添加在字符串前面
+            str = "<\/li>"+str;
+            for(col=row;col!=10;col++){
+                str = `<span>${row}*${col}=${row*col}<\/span>${str}`;
+            }
+            str = "<li>"+str;
+        }
+        arrList[2].innerHTML = str;
+
+        for(row=9,str="";row !=0;row--){
+            str += "<li>";
+            for(col=row;col!=0;col--){
+                str += `<span>${row}*${col}=${row*col}<\/span>`;
+            }
+            str += "<\/li>";
+        }
+        arrList[3].innerHTML = str;
+
+    </script>
+</body>
+</html>
