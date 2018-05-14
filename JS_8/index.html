@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择和取消</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            list-style-type:none;
+        }
+        .box{
+            width: 500px;
+            border: 1px solid;
+            margin: 50px auto;
+        }
+        li,.all-xuanze{
+            height: 50px;
+            line-height: 50px;
+            padding-left: 50px;
+            border-bottom: 1px solid #000;
+            background: url("ck.png") 10px 10px/30px 30px no-repeat;
+            cursor: pointer;
+        }
+        .all-xuanze{
+            border: none;
+        }
+        .activity{
+            background-image: url('cked.jpg');
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+    <ul class="list">
+        <li>第一个</li>
+        <li>第二个</li>
+        <li>第三个</li>
+        <li>第四个</li>
+        <li>第五个</li>
+        <li>第六个</li>
+    </ul>
+    <p class="all-xuanze">
+        全选
+    </p>
+    </div>
+    <script>
+        var oLis = document.getElementsByTagName('li'),
+            allBut = document.getElementsByClassName('all-xuanze')[0],
+            count = 0,
+            arrColor = ['#f66','#7d92ff'],
+            liLength = oLis.length;
+        allBut.all = false; //控制是否全选的开关，false表示还没有全选，true为已全选
+
+        for (var i = 0;i<liLength;i++){
+            oLis[i].style.backgroundColor = arrColor[i%2];
+            oLis[i].index = i;
+            oLis[i].onmouseenter = function () {
+                this.style.backgroundColor = '#43ff5f';
+            }
+            oLis[i].onmouseleave = function () {
+                this.style.backgroundColor = arrColor[this.index%2];
+            }
+            oLis[i].onclick = function () {
+                if (this.className){    //为真则表示已选择，此时要取消选择
+                    this.className = '';
+                    count--;
+                    allBut.className = 'all-xuanze';
+                    allBut.all = !allBut.all;
+                } 
+                else{
+                    this.className = 'activity';
+                    count++;
+                }
+                if (count == 6){
+                    allBut.className = 'activity '+allBut.className;
+                    allBut.all = !allBut.all;
+                }
+            }
+        }
+        //下面是全选或全不选的点击事件
+        allBut.onclick = function () {
+            if (allBut.all){
+                for (var i = 0;i!=liLength;i++){
+                    oLis[i].className = '';
+                }
+                allBut.className = 'all-xuanze';
+                count = 0;
+            }
+            else{
+                for (var i = 0;i!=liLength;i++){
+                    oLis[i].className = 'activity';
+                }
+                allBut.className = 'activity '+allBut.className;
+                count = 6;
+            }
+            allBut.all = !allBut.all;
+        }
+    </script>
+</body>
+</html>
