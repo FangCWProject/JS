@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body,ul,li,span,input,button{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            width: 400px;
+            margin: 50px auto;
+        }
+        li{
+            display: flex;
+            align-items: center;
+            height: 50px;
+            padding-left: 15px;
+            border-bottom: 3px solid #f66;
+            line-height: 50px;
+            font-family: '微软雅黑';
+            font-size: 20px;
+        }
+        .xianshi,.inp-text{
+            display: none;
+        }
+        .inp-text{
+            width: 195px;
+            height: 26px;
+            font-size: 20px;
+        }
+        li>button{
+            display: none;
+            height: 30px;
+            width: 50px;
+            border: none;
+            margin-left: 15px;
+            background-color: #333;
+            color: #fff;
+        }
+        .box .on{
+            display: block;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<ul class="box">
+    <li>
+        <span class="xianshi on">这里显示文本</span>
+        <input type="text" class="inp-text">
+        <button class="change-but on">修改</button>
+        <button class="queren-but">确认</button>
+    </li>
+    <li>
+        <span class="xianshi on">这里显示文本</span>
+        <input type="text" class="inp-text">
+        <button class="change-but on">修改</button>
+        <button class="queren-but">确认</button>
+    </li>
+    <li>
+        <span class="xianshi on">这里显示文本</span>
+        <input type="text" class="inp-text">
+        <button class="change-but on">修改</button>
+        <button class="queren-but">确认</button>
+    </li>
+    <li>
+        <span class="xianshi on">这里显示文本</span>
+        <input type="text" class="inp-text">
+        <button class="change-but on">修改</button>
+        <button class="queren-but">确认</button>
+    </li>
+    <li>
+        <span class="xianshi on">这里显示文本</span>
+        <input type="text" class="inp-text">
+        <button class="change-but on">修改</button>
+        <button class="queren-but">确认</button>
+    </li>
+</ul>
+<script>
+    var oBox = document.getElementsByClassName('box')[0],
+        arrLi = oBox.getElementsByTagName('li'),
+        arrSpan = oBox.getElementsByTagName('span'),
+        arrText = oBox.getElementsByClassName('inp-text'),
+        arrCbut = oBox.getElementsByClassName('change-but'),
+        arrQbut = oBox.getElementsByClassName('queren-but'),
+        liLen = arrLi.length;
+
+    for(var i = 0;i<liLen;i++){
+        // arrCbut[i].setAttribute('index',i);
+        // arrQbut[i].setAttribute('index',i);
+        arrCbut[i].index = i;
+        arrQbut[i].index = i;
+
+        arrCbut[i].onclick = fnChange;
+        arrQbut[i].onclick = fnQueding;
+    }
+
+    function fnChange(){
+        // var i = this.getAttribute('index');
+        var i = this.index;
+        arrText[i].value = arrSpan[i].innerText;
+        arrSpan[i].className = 'xianshi';
+        arrText[i].className = 'on '+arrText[i].className;  //这样写可以兼容低版本的IE，虽然感觉现在应该不需要就是了
+        arrCbut[i].className = 'change-but';
+        arrQbut[i].className = 'on '+arrQbut[i].className;
+    }
+
+    function fnQueding(){
+        var i = this.index;
+        arrSpan[i].innerText = arrText[i].value;
+        arrText[i].className = 'inp-text';
+        arrSpan[i].className = 'on '+arrSpan[i].className;
+        arrQbut[i].className = 'queren-but';
+        arrCbut[i].className = 'on '+arrCbut[i].className;
+    }
+
+</script>
+</body>
+</html>
