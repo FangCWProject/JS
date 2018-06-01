@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>简单的冒泡排序算法</title>
+<style>
+    body,input,button,p{
+    padding:0;
+    margin:0;
+}
+    span{
+	display:inline-block;
+	width:10px;
+	background-color:#6cf;
+	margin:0 5px;
+}
+    .box{
+        width:500px;
+        margin:50px auto;
+    }
+    .div-xianshi{
+	padding:15px 10px;
+}
+</style>
+</head>
+<body>
+    <div class="box">
+        <input type="text" class="inp-text">
+        <button class="add-but">添加</button>
+        <button class="ok-but">确定</button>
+        <div class="div-xianshi"></div>
+    </div>
+<script>
+	var arr = [],
+	    oText = document.getElementsByClassName('inp-text')[0],
+	    oAddBut = document.getElementsByClassName('add-but')[0],
+	    oOkBut = document.getElementsByClassName('ok-but')[0],
+	    oDiv = document.getElementsByClassName('div-xianshi')[0];
+	
+	oAddBut.onclick = function () {
+		var i=Number(oText.value);
+		if(i||i===0){
+			if(i>0&&i<=100){
+			    arr.push(i);
+			    oDiv.innerHTML += `<span style="height:${i}px"></span>`;
+            }
+			else
+			    alert('输入的数字应在(0,100]区间内');
+		}else{
+			alert("输入纯数字");
+		}
+		oText.value = '';
+		
+	}
+
+	oOkBut.onclick = function () {
+		var len = arr.length;
+		for(var i = 0;i<len-1;i++){
+			for(var j = 1;j<len-i;j++){
+			arr[j-1] = arr[j-1]>arr[j]?
+				[arr[j],arr[j]=arr[j-1]][0]:
+				[arr[j-1],arr[j]][0];
+			}
+		}
+		oDiv.innerHTML = '';
+		for(var i=0;i<len;i++){
+			oDiv.innerHTML += `<span style="height:${arr[i]}px"></span>`;
+		}
+
+	}
+</script>
+</body>
+</html>
