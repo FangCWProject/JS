@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,span,div{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            position: relative;
+            width: 500px;
+            height: 500px;
+            -webkit-border-radius: 250px;
+            -moz-border-radius: 250px;
+            border-radius: 250px;
+            border: 2px solid #6cf;
+            margin: 50px auto;
+        }
+        span{
+            position: absolute;
+            top: 5px;
+            left: 250px;
+            width: 2px;
+            height: 20px;
+            -webkit-transform-origin: 0 245px;
+            -moz-transform-origin: 0 245px;
+            -ms-transform-origin: 0 245px;
+            -o-transform-origin: 0 245px;
+            transform-origin: 0 245px;
+            background-color: #f66;
+        }
+        .hour,.minute,.second{
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            bottom: 250px;
+            transform-origin: center bottom;
+        }
+        .second{
+            width: 3px;
+            height: 200px;
+            background-color: #ff2c58;
+        }
+        .minute{
+            width: 5px;
+            height: 160px;
+            background-color: #52ff70;
+        }
+        .hour{
+            width: 8px;
+            height: 100px;
+            background-color: #4972ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        
+    </div>
+    <script>
+        var oBox = document.getElementsByClassName('box')[0],
+            oHour = document.createElement('div'),
+            oMinute = document.createElement('div'),
+            oSecond = document.createElement('div');
+        
+        for (var i=0;i<60;i++){
+            oBox.innerHTML += i%5==0?`<span style="width:4px;height:25px;transform:rotate(${i*6}deg); background-color:#1a9ce4;"></span>`:`<span style="transform:rotate(${i*6}deg)"></span>`;
+        }
+        oSecond.classList.add('second');
+        oMinute.classList.add('minute');
+        oHour.classList.add('hour');
+        oBox.appendChild(oSecond);
+        oBox.appendChild(oMinute);
+        oBox.appendChild(oHour);
+
+        zhong();
+        setInterval(zhong,1000);
+
+        function zhong () {
+            var dt = new Date(),
+                h = dt.getHours(),
+                m = dt.getMinutes(),
+                s = dt.getSeconds();
+
+            oHour.style.transform = `rotate(${(h+m/60)*30}deg)`;
+            oMinute.style.transform = `rotate(${m*6}deg)`;
+            oSecond.style.transform = `rotate(${s*6}deg)`;
+        }
+    </script>
+</body>
+</html>
