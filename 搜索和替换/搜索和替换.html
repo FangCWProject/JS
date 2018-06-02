@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关键字搜索和关键字替换</title>
+    <style>
+        body,input,button,p{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 800px;
+        }
+        input{
+            height: 26px;
+            margin: 5px;
+            font-size: 20px;
+        }
+        button{
+            height: 30px;
+            border: none;
+            padding: 0 5px;
+            margin-right: 10px;
+            background-color: #000;
+            color: #fff;
+            font-size: 20px;
+        }
+        p{
+            font-size: 20px;
+            font-family: '微软雅黑';
+        }
+        #p-value span{
+            font-size: 35px;
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="text" class="sou-key" placeholder="搜索框">
+    <input type="text" class="tihuan-key" placeholder="替换框">
+    <button class="query-but">搜索</button>
+    <button class="tihuan-but">替换</button>
+    <p id="p-value">时间戳（timestamp），一个能表示一份数据在某个特定时间之前已经存在的、 完整的、 可验证的数据,通常是一个字符序列，唯一地标识某一刻的时间。使用数字签名技术产生的数据， 签名的对象包括了原始文件信息、 签名参数、 签名时间等信息。广泛的运用在知识产权保护、 合同签字、 金融帐务、 电子报价投标、 股票交易等方面。</p>
+</div>
+    <script>
+        var oInpSou = document.getElementsByClassName('sou-key')[0],
+            oInpHuan = document.getElementsByClassName('tihuan-key')[0],
+            oButQuery = document.getElementsByClassName('query-but')[0],
+            oButHuan = document.getElementsByClassName('tihuan-but')[0],
+            oPValue = document.getElementById('p-value'),
+            str = oPValue.innerHTML;
+
+        oButQuery.onclick = function () {
+            var key = oInpSou.value.trim();
+
+            if (str.indexOf(key)<0){
+                alert("查询不到此关键字");
+            } else{
+                oPValue.innerHTML = str;
+                if (key){
+                    oPValue.innerHTML = oPValue.innerHTML.split(key).join(`<span>${key}</span>`);
+                } else{
+                    alert("请输入关键字");
+                }
+            }
+        }
+
+        oButHuan.onclick = function () {
+            var queryKey = oInpSou.value.trim(),
+                huanKey = oInpHuan.value.trim();
+            if (str.indexOf(queryKey)<0){
+                alert("查无此关键字,无法替换");
+            } else {
+                if (huanKey){
+                    str = str.split(queryKey).join(huanKey);
+                    oPValue.innerHTML = oPValue.innerHTML.split(queryKey).join(`<span>${huanKey}</span>`);
+                } else {
+                    alert("替换框内必须有内容！(不能为纯空格)");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
