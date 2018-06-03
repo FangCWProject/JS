@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>延时跳转</title>
+</head>
+<body>
+    <p style="text-align: center;">
+        网页将在
+        <span id="sp" style="color: #f66;font-size: 20px;">5</span>
+        秒后跳转……
+    </p>
+    <script>
+        var oSp = document.getElementById('sp'),
+            i = 5;
+
+        function fn(){
+            if(i>0){
+                oSp.innerText = i;
+                i--;
+                setTimeout(fn,1000);
+            } else{
+                window.location.href = "https://www.baidu.com";
+            }
+        }
+        fn();
+    </script>
+</body>
+</html>
